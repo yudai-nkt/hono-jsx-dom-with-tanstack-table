@@ -7,9 +7,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "hono": "^4.2.5"
+    "@tanstack/react-table": "^8.16.0",
+    "hono": "^4.2.5",
+    "urql": "^4.0.7"
   },
   "devDependencies": {
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@nitrogql/cli": "^1.7.0",
+    "@nitrogql/rollup-plugin": "^1.7.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }

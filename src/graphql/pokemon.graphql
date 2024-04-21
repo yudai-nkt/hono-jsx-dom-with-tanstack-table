@@ -1,0 +1,14 @@
+query {
+  pokemon: pokemon_v2_pokemon(where: { is_default: { _eq: true } }) {
+    id
+    name
+    types: pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        name
+      }
+    }
+    specy: pokemon_v2_pokemonspecy {
+      generation_id
+    }
+  }
+}

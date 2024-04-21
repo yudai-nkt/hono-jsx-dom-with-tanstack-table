@@ -1,10 +1,16 @@
-import { useState } from "hono/jsx/dom";
+import { PokemonTable } from "./components/PokemonTable";
+import { Client, Provider, cacheExchange, fetchExchange } from "urql";
 
 export const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
+    <Provider
+      value={
+        new Client({
+          url: "https://beta.pokeapi.co/graphql/v1beta",
+          exchanges: [cacheExchange, fetchExchange],
+        })
+      }
+    >
       <header>
         <h1>
           TanStack Table with <code>hono/jsx/dom</code>
@@ -12,14 +18,21 @@ export const App = () => {
       </header>
       <main>
         <div>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
           <p>
-            Edit <code>src/app.tsx</code> and save to test HMR
+            The table below is created using{" "}
+            <a
+              href="https://pokeapi.co"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              PokéAPI
+            </a>{" "}
+            GraphQL API.
           </p>
         </div>
+        <hr />
+        <PokemonTable />
       </main>
-    </>
+    </Provider>
   );
 };
