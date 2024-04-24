@@ -48,6 +48,7 @@ export const PokemonTable = () => {
     <>
       <Pagination table={table} />
       <table>
+        <caption>List of all Pokémon</caption>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
