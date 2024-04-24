@@ -7,6 +7,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Pagination } from "./Pagination";
 
 export const PokemonTable = () => {
   const [{ fetching, data }] = useQuery({ query: Query });
@@ -45,39 +46,7 @@ export const PokemonTable = () => {
 
   return (
     <>
-      <div>
-        <button
-          onClick={() => table.firstPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {"«"}
-        </button>
-        <button
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {"‹"}
-        </button>
-        <button
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {"›"}
-        </button>
-        <button
-          onClick={() => table.lastPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {"»"}
-        </button>{" "}
-        <span>
-          Page{" "}
-          <strong>
-            {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount().toLocaleString()}
-          </strong>
-        </span>
-      </div>
+      <Pagination table={table} />
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
