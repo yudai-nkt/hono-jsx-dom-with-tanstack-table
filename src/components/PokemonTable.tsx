@@ -26,7 +26,7 @@ export const PokemonTable = () => {
 
   const columnHelper = createColumnHelper<(typeof pokemon)[number]>();
   const columns = [
-    columnHelper.accessor("id", { header: "Pokédex number" }),
+    columnHelper.accessor("id", { header: "Pokédex #" }),
     columnHelper.accessor("name", { header: "Name" }),
     columnHelper.accessor("type1", { header: "Type 1" }),
     columnHelper.accessor("type2", { header: "Type 2" }),
