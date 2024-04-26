@@ -52,7 +52,7 @@ export const PokemonTable = () => {
     data: pokemon,
     columns,
     initialState: {
-      pagination: { pageSize: 100 },
+      pagination: { pageSize: 200 },
       sorting: [{ id: "id", desc: false }],
     },
     getCoreRowModel: getCoreRowModel(),
