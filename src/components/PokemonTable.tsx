@@ -1,4 +1,3 @@
-import Query from "../graphql/pokemon.graphql";
 import { useQuery } from "urql";
 import {
   createColumnHelper,
@@ -11,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { Pagination } from "./Pagination";
 import { SortIndicator } from "./SortIndicator";
+import Query from "../graphql/pokemon.graphql";
 
 export const PokemonTable = () => {
   const [{ fetching, data }] = useQuery({ query: Query });
