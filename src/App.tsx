@@ -13,7 +13,7 @@ export const App = () => {
     >
       <header>
         <h1>
-          TanStack Table with <code>hono/jsx/dom</code>
+          <code>@tanstack/react-table</code> with <code>hono/jsx/dom</code>
         </h1>
       </header>
       <main>
