@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "nitrogql generate && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
