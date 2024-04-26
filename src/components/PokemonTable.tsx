@@ -4,10 +4,13 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { Pagination } from "./Pagination";
+import { SortIndicator } from "./SortIndicator";
 
 export const PokemonTable = () => {
   const [{ fetching, data }] = useQuery({ query: Query });
@@ -26,7 +29,16 @@ export const PokemonTable = () => {
 
   const columnHelper = createColumnHelper<(typeof pokemon)[number]>();
   const columns = [
-    columnHelper.accessor("id", { header: "Pokédex #" }),
+    columnHelper.accessor("id", {
+      header: ({ column }) => (
+        <span>
+          Pokédex #{" "}
+          <button onClick={column.getToggleSortingHandler()}>
+            <SortIndicator direction={column.getIsSorted()} />
+          </button>
+        </span>
+      ),
+    }),
     columnHelper.accessor("name", { header: "Name" }),
     columnHelper.accessor("type1", { header: "Type 1" }),
     columnHelper.accessor("type2", { header: "Type 2" }),
@@ -39,13 +51,33 @@ export const PokemonTable = () => {
   const table = useReactTable({
     data: pokemon,
     columns,
-    initialState: { pagination: { pageSize: 100 } },
+    initialState: {
+      pagination: { pageSize: 100 },
+      sorting: [{ id: "id", desc: false }],
+    },
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
     <>
+      <label for="gen-filter">Filter by generation:</label>
+      <select
+        name="generation"
+        id="gen-filter"
+        onChange={({ target }) =>
+          target instanceof HTMLSelectElement &&
+          table.getColumn("gen")?.setFilterValue(target.value)
+        }
+        value={table.getColumn("gen")?.getFilterValue() as string}
+      >
+        <option value="">Choose a generation</option>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((gen) => (
+          <option value={gen}>Gen {gen}</option>
+        ))}
+      </select>
       <Pagination table={table} />
       <table>
         <caption>List of all Pokémon</caption>
