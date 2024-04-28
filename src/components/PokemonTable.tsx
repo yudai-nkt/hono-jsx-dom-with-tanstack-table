@@ -43,7 +43,7 @@ export const PokemonTable = () => {
     columnHelper.accessor("type1", { header: "Type 1" }),
     columnHelper.accessor("type2", { header: "Type 2" }),
     columnHelper.accessor("gen", {
-      header: "First appeared in",
+      header: "Debut in",
       cell: ({ row }) => `Gen ${row.original.gen}`,
     }),
   ];
