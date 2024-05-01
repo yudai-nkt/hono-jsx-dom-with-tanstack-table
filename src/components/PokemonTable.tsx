@@ -78,7 +78,7 @@ const Table = ({ data }: { data: Pokemon[] }) => {
   });
   return (
     <>
-      <label htmlFor="gen-filter">Filter by generation:</label>
+      <label for="gen-filter">Filter by generation:</label>
       <select
         name="generation"
         id="gen-filter"
