@@ -71,7 +71,6 @@ const Table = ({ data }: { data: Pokemon[] }) => {
     columns,
     initialState: {
       pagination: { pageSize: 200 },
-      sorting: [{ id: "id", desc: false }],
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
