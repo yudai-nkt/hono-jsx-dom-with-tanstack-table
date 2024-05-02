@@ -59,6 +59,8 @@ const Table = ({ data }: { data: Pokemon[] }) => {
       columnHelper.accessor("gen", {
         header: "Debut in",
         cell: ({ row }) => `Gen ${row.original.gen}`,
+        filterFn: (row, _, filter: string) =>
+          filter === "" || row.getValue("gen") === Number(filter),
       }),
     ],
     []
