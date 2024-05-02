@@ -5,9 +5,10 @@ A sample app to investigate React Table compatibilty with Hono's client componen
 ## Result
 
 - Basic table rendering: compatible
-- Client-side interaction (sort, filter, pagination) : didn't work
-  - the app hangs when the corresponding event handlers are fired
-  - not sure if they are incompatible or I just implemented poorly.
+- Client-side interaction:
+  - sort: compatible
+  - pagination: compatible
+  - filter: compatible
 
 ### Additional notes
 
