@@ -12,7 +12,7 @@ A sample app to investigate React Table compatibilty with Hono's client componen
 
 ### Additional notes
 
-I also tried `@tanstack/react-query`'s `useSuspenseQuery`, but it was incompatible with Hono because `useSyncExternalStore` is missing.
+I also tried `@tanstack/react-query`'s `useSuspenseQuery`, but it was incompatible with Hono because Hono's `useSyncExternalStore` currently doesn't support `getServerSnapshot`.
 
 ## License
 
