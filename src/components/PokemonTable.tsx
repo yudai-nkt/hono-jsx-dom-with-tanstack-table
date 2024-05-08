@@ -1,5 +1,6 @@
-import { useMemo } from "hono/jsx";
-import { useQuery } from "urql";
+import request from "graphql-request";
+import { useMemo, Suspense } from "hono/jsx/dom";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   createColumnHelper,
   flexRender,
@@ -22,24 +23,22 @@ type Pokemon = {
 };
 
 export const PokemonTable = () => {
-  const [{ fetching, data }] = useQuery({ query: Query });
-
-  return fetching || !data ? (
-    <p>Loading...</p>
-  ) : (
-    <Table
-      data={data.pokemon.map((p) => ({
+  const { data } = useSuspenseQuery({
+    queryKey: ["pokemon-list"],
+    queryFn: async () => {
+      const { pokemon } = await request(
+        "https://beta.pokeapi.co/graphql/v1beta",
+        Query
+      );
+      return pokemon.map((p) => ({
         id: p.id,
         name: p.name,
         type1: p.types[0]?.pokemon_v2_type?.name ?? "N/A",
         type2: p.types[1]?.pokemon_v2_type?.name ?? "N/A",
         gen: p.specy?.generation_id,
-      }))}
-    />
-  );
-};
-
-const Table = ({ data }: { data: Pokemon[] }) => {
+      }));
+    },
+  });
   const columnHelper = createColumnHelper<Pokemon>();
   const columns = useMemo(
     () => [
@@ -65,7 +64,6 @@ const Table = ({ data }: { data: Pokemon[] }) => {
     ],
     []
   );
-
   const table = useReactTable({
     data,
     columns,
@@ -78,8 +76,9 @@ const Table = ({ data }: { data: Pokemon[] }) => {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
   return (
-    <>
+    <Suspense fallback={<p>Loading...</p>}>
       <label for="gen-filter">Filter by generation:</label>
       <select
         name="generation"
@@ -128,6 +127,6 @@ const Table = ({ data }: { data: Pokemon[] }) => {
           ))}
         </tbody>
       </table>
-    </>
+    </Suspense>
   );
 };

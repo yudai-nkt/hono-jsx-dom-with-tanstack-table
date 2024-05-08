@@ -1,16 +1,11 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PokemonTable } from "./components/PokemonTable";
-import { Client, Provider, cacheExchange, fetchExchange } from "urql";
+
+const client = new QueryClient();
 
 export const App = () => {
   return (
-    <Provider
-      value={
-        new Client({
-          url: "https://beta.pokeapi.co/graphql/v1beta",
-          exchanges: [cacheExchange, fetchExchange],
-        })
-      }
-    >
+    <QueryClientProvider client={client}>
       <header>
         <h1>
           <code>@tanstack/react-table</code> with <code>hono/jsx/dom</code>
@@ -33,6 +28,6 @@ export const App = () => {
         <hr />
         <PokemonTable />
       </main>
-    </Provider>
+    </QueryClientProvider>
   );
 };
